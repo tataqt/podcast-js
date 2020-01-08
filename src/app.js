@@ -1,7 +1,7 @@
 import { createModal, isValid } from './utils'
 import { Question } from './question'
 import './style.css'
-import { getAuthForm } from './auth';
+import { getAuthForm, authWithEmailAndPassword } from './auth';
 
 const form = document.getElementById("form");
 const input = form.querySelector("#question-input");
@@ -44,6 +44,21 @@ function openModal() {
 function authFormHandler(event) {
     event.preventDefault();
 
-    const email = event.target.querySelector('#email').value
-    const password = event.target.querySelector('#password').value
+    const btn = event.target.querySelector('button');
+    const email = event.target.querySelector('#email').value;
+    const password = event.target.querySelector('#password').value;
+
+    btn.disabled = true;
+    authWithEmailAndPassword(email, password)
+        .then(Question.fetch)
+        .then(renderModalAfterAuth)
+        .then(() => { btn.disabled = false })
+}
+
+function renderModalAfterAuth(content) {
+    if (typeof content === 'string') {
+        createModal('Ошибка!', content)
+    } else {
+        createModal('Список вопросов', Question.listToHtml(content))
+    }
 }
