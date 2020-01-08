@@ -59,10 +59,28 @@ button {
     right: 50px;
 }
 
-.modal{
+.modal {
     max-width: 600px;
     max-height: 300px;
     margin: 100px auto;
     overflow-y: auto;
-    background:#fff;
+    background: #fff;
+}
+
+.modal > h1 {
+    text-align: center;
+}
+
+.modal .modal-content {
+    padding: 1rem;
+  }
+
+.mui--text-black-54.mui--text-body1 {
+    margin-top: 50px;
+}
+.mui--text-black-54.mui--text-body2 {
+    margin-top: 50px;
+}
+.mui-divider {
+    margin-bottom: 30px;
 }
